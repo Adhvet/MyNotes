@@ -16,10 +16,11 @@ void main() {
           ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 34, 198, 201)),
       useMaterial3: true,
     ),
-    home: const NotesView(),
+    home: const HomePage(),
     routes: {
-      "/login/": (context) => const LoginView(),
-      "/register/": (context) => const RegisterView(),
+      '/notes/':(context) => const NotesView(),
+      '/login/': (context) => const LoginView(),
+      '/register/': (context) => const RegisterView(),
     },
   ));
 }
