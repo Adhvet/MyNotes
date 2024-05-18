@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mynotes/constants/routes.dart';
 import 'package:mynotes/firebase_options.dart';
 import 'dart:developer' as devtools show log;
+import 'package:mynotes/utilities/show_error_dialog.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -63,10 +64,21 @@ class _LoginViewState extends State<LoginView> {
                 );
               } on FirebaseAuthException catch (e) {
                 if (e.code == "invalid-credential") {
-                  devtools.log("invalid credentials teri ma ki chu");
+                  await showErrorDialog(
+                    context,
+                    "Invalid Credentials",
+                  );
                 } else {
-                  devtools.log("something else happened");
+                  await showErrorDialog(
+                    context,
+                    "Error: ${e.code}",
+                  );
                 }
+              } catch (e) {
+                await showErrorDialog(
+                  context,
+                  e.toString(),
+                );
               }
             },
             child: const Text("login"),
@@ -82,3 +94,5 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
+
+
